@@ -1,0 +1,11 @@
+C:\JK\Projects\Dotnet\Self\Bazzar\B.Common\bin\Debug\net5.0\B.Common.deps.json
+C:\JK\Projects\Dotnet\Self\Bazzar\B.Common\bin\Debug\net5.0\B.Common.dll
+C:\JK\Projects\Dotnet\Self\Bazzar\B.Common\bin\Debug\net5.0\ref\B.Common.dll
+C:\JK\Projects\Dotnet\Self\Bazzar\B.Common\bin\Debug\net5.0\B.Common.pdb
+C:\JK\Projects\Dotnet\Self\Bazzar\B.Common\obj\Debug\net5.0\B.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\JK\Projects\Dotnet\Self\Bazzar\B.Common\obj\Debug\net5.0\B.Common.AssemblyInfoInputs.cache
+C:\JK\Projects\Dotnet\Self\Bazzar\B.Common\obj\Debug\net5.0\B.Common.AssemblyInfo.cs
+C:\JK\Projects\Dotnet\Self\Bazzar\B.Common\obj\Debug\net5.0\B.Common.csproj.CoreCompileInputs.cache
+C:\JK\Projects\Dotnet\Self\Bazzar\B.Common\obj\Debug\net5.0\B.Common.dll
+C:\JK\Projects\Dotnet\Self\Bazzar\B.Common\obj\Debug\net5.0\ref\B.Common.dll
+C:\JK\Projects\Dotnet\Self\Bazzar\B.Common\obj\Debug\net5.0\B.Common.pdb

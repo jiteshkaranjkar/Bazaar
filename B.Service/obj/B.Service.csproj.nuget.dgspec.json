@@ -1,0 +1,189 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Service\\B.Service.csproj": {}
+  },
+  "projects": {
+    "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Common\\B.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Common\\B.Common.csproj",
+        "projectName": "B.Common",
+        "projectPath": "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Common\\B.Common.csproj",
+        "packagesPath": "C:\\Users\\jkaranjkar\\.nuget\\packages\\",
+        "outputPath": "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\jkaranjkar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Domain\\B.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Domain\\B.Domain.csproj",
+        "projectName": "B.Domain",
+        "projectPath": "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Domain\\B.Domain.csproj",
+        "packagesPath": "C:\\Users\\jkaranjkar\\.nuget\\packages\\",
+        "outputPath": "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\jkaranjkar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Service\\B.Service.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Service\\B.Service.csproj",
+        "projectName": "B.Service",
+        "projectPath": "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Service\\B.Service.csproj",
+        "packagesPath": "C:\\Users\\jkaranjkar\\.nuget\\packages\\",
+        "outputPath": "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Service\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\jkaranjkar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Common\\B.Common.csproj": {
+                "projectPath": "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Common\\B.Common.csproj"
+              },
+              "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Domain\\B.Domain.csproj": {
+                "projectPath": "C:\\JK\\Projects\\Dotnet\\Self\\Bazzar\\B.Domain\\B.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.Azure.Cosmos": {
+              "target": "Package",
+              "version": "[3.26.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
