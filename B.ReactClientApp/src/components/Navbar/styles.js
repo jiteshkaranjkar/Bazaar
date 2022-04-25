@@ -1,26 +1,59 @@
 export const navbarStyles = {
-    drawer: {
-        width: 240,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
-            width: 240,
-            boxSizing: 'border-box',
-            backgroundColor: '#101F33',
-            color: 'rgba(255, 255, 255, 0.7)',
-        },
-        '& .Mui-selected': {
-            color: 'red',
-        },
+  drawer: {
+    width: 200,
+    display: { xs: "none", sm: "block" },
+    flexShrink: 0,
+    "& .MuiDrawer-paper": {
+      width: 200,
+      backgroundColor: "#101F33",
+      color: "rgba(255, 255, 255, 0.7)",
+      boxSizing: "border-box",
     },
-    icons: {
-        color: 'rgba(255, 255, 255, 0.7)!important',
-        marginLeft: '20px',
+    "& .Mui-selected": {
+      color: "red",
     },
-    text: {
-        '& span': {
-            marginLeft: '-10px',
-            fontWeight: '600',
-            fontSize: '16px',
-        }
-    }
+  },
+  toolbar: {
+    fontWeight: "600",
+    fontSize: "24px",
+    // theme.mixins.toolbar
+  },
+  accountBalanceIcon: {
+    marginRight: "10px",
+  },
+  icons: {
+    color: "rgba(255, 255, 255, 0.7)!important",
+    marginLeft: "10px",
+    marginRight: "-10px",
+  },
+  divider: {
+    backgroundColor: "#FFFFFF",
+  },
+  text: {
+    "& span": {
+      marginLeft: "-10px",
+      fontWeight: "600",
+      fontSize: "16px",
+      marginRight: "10px",
+    },
+  },
+  appBar: {
+    marginLeft: 200,
+    // [theme.breakpoints.up("sm")]: {
+    //   width: `calc(100% - ${drawerWidth}px)`
+    // }
+  },
+  menuButton: {
+    marginRight: 2,
+    // [theme.breakpoints.up("sm")]: {
+    //   display: "none"
+    // }
+  },
+  drawerPaper: {
+    width: 200
+  },
+  content: {
+    flexGrow: 1,
+    padding: 3
+  }
 };

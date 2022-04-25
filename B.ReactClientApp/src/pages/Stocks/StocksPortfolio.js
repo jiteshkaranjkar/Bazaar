@@ -1,6 +1,5 @@
 import React from "react";
 import StockLists from "./StockLists";
-import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 
 export class StocksPortfolio extends React.Component {

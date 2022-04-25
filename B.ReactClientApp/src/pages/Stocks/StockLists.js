@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import StocksForm from "../AddStocks/StocksForm";
+import StocksForm from "./StocksForm";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";

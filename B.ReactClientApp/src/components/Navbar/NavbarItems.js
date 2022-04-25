@@ -1,45 +1,39 @@
 import PeopleIcon from '@mui/icons-material/People';
-import ImageIcon from '@mui/icons-material/Image';
-import PublicIcon from '@mui/icons-material/Public';
-import SettingsEthernetIcon from '@mui/icons-material/SettingsEthernet';
-import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponent';
-import DnsIcon from '@mui/icons-material/Dns';
+import HouseIcon from '@mui/icons-material/House';
+import StoreIcon from '@mui/icons-material/Store';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
+import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
 
 export const mainNavbarItems = [
     {
         id: 0,
-        icon: <PeopleIcon />,
-        label: 'StocksPortfolio',
-        route: 'stocks-portfolio',
+        icon: <AutoGraphIcon />,
+        label: 'Stocks',
+        route: 'stocks',
     },
     {
         id: 1,
-        icon: <DnsIcon />,
-        label: 'AddStocks',
-        route: 'add-stocks',
+        icon: <TimelineIcon />,
+        label: 'ETFs',
+        route: 'etfs',
     },
     {
         id: 2,
-        icon: <ImageIcon />,
-        label: 'Storage',
-        route: 'storage',
+        icon: <CurrencyBitcoinIcon />,
+        label: 'Crypto',
+        route: 'crypto',
     },
     {
         id: 3,
-        icon: <PublicIcon />,
-        label: 'Hosting',
-        route: 'hosting',
+        icon: <HouseIcon />,
+        label: 'RealEstate',
+        route: 'real-estate',
     },
     {
         id: 4,
-        icon: <SettingsEthernetIcon />,
-        label: 'Functions',
-        route: 'functions',
-    },
-    {
-        id: 5,
-        icon: <SettingsInputComponentIcon />,
-        label: 'Machine learning',
-        route: 'machine-learning',
-    },
+        icon: <StoreIcon />,
+        label: 'Commodities',
+        route: 'commodities',
+    }
 ]
