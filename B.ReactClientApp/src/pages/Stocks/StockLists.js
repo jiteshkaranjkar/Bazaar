@@ -2,13 +2,14 @@ import React, { Fragment, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import StocksForm from "./StocksForm";
+import StocksForm from "./AddStock/StocksForm";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Box from "@mui/material/Box";
+import AddStockDialog from "./AddStock/AddStockDialog";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90, sortable: false, hide: true },
@@ -65,36 +66,36 @@ export default function StockLists(props) {
       <div>
         {typeof props.portfolio !== "undefined" &&
         typeof props.portfolio.quotes !== "undefined" ? (
-          <div style={{ display: "flow-root", height: 800, width: "100%"}}>
+          <div style={{ display: "flow-root", height: 800, width: "100%" }}>
             <Box display="flex" m={2} pt={2}>
-            <Typography
-              variant="h4"
-              gutterBottom
-              component="div"
-              display="inline"
-            >
-              Portfolio :{" "}
               <Typography
-                variant="h5"
+                variant="h4"
                 gutterBottom
                 component="div"
                 display="inline"
-                style={{marginright: 20 }}
               >
-                {props.portfolio.portfolios[0].pfName}
+                Portfolio :{" "}
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  component="div"
+                  display="inline"
+                  style={{ marginright: 20 }}
+                >
+                  {props.portfolio.portfolios[0].pfName}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  component="div"
+                  display="inline"
+                  style={{ marginLeft: 20 }}
+                >
+                  <Button variant="contained" onClick={handleClickOpen}>
+                    Add Stock
+                  </Button>
+                </Typography>
               </Typography>
-              <Typography
-                variant="h5"
-                gutterBottom
-                component="div"
-                display="inline"
-                style={{marginLeft: 20 }}
-              >
-                <Button variant="contained" onClick={handleClickOpen}>
-                  Add Stock
-                </Button>
-              </Typography>
-            </Typography>
             </Box>
             <DataGrid
               rows={rows}
@@ -110,17 +111,7 @@ export default function StockLists(props) {
         )}
       </div>
       <div>
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Add Stock</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              To Add new/existing stock.
-            </DialogContentText>
-            <StocksForm open={open} handleClose={handleClose} />
-          </DialogContent>
-          <DialogActions>
-          </DialogActions>
-        </Dialog>
+        <AddStockDialog open={open} handleClose={handleClose} />
       </div>
     </Fragment>
   );

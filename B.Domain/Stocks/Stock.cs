@@ -6,9 +6,10 @@ namespace B.Domain.Stocks
 {
     public partial class Stock : BaseEntity
     {
-        private int _quantity;
-        private decimal _totalPrice;
-        private decimal _unitPrice;
+        private int quantity;
+        private decimal totalPrice;
+        private decimal unitPrice;
+        private decimal holdingPrice;
 
         [JsonProperty(PropertyName = "id")]
         public Guid Id { get; set; }
@@ -16,21 +17,31 @@ namespace B.Domain.Stocks
         [JsonProperty(PropertyName = "symbol")]
         public string Symbol { get; init; }
 
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; init; }
+        [JsonProperty(PropertyName = "longName")]
+        public string LongName { get; init; }
 
         [JsonProperty(PropertyName = "date")]
         public DateTime Date { get; set; }
-        [JsonProperty(PropertyName = "totalPrice")]
-        public decimal TotalPrice { get { return _totalPrice; } private set { _totalPrice = value; } }
-        [JsonProperty(PropertyName = "unitPrice")]
-        public decimal UnitPrice { get { return _unitPrice; } set { _unitPrice = value; } }
-        [JsonProperty(PropertyName = "quantity")]
-        public int Quantity { get { return _quantity; } set { _quantity = value; UpdateTotalPrice(); } }
 
-        public void UpdateTotalPrice()
+        [JsonProperty(PropertyName = "totalPrice")]
+        public decimal TotalPrice { get { return totalPrice; } private set { totalPrice = value; } }
+
+        [JsonProperty(PropertyName = "unitPrice")]
+        public decimal UnitPrice { get { return unitPrice; } set { unitPrice = value; UpdateTotalUnitPrice(); } }
+
+        [JsonProperty(PropertyName = "holdingPrice")]
+        public decimal HoldingPrice { get { return unitPrice; } set { unitPrice = value; UpdateTotalHoldingPrice(); } }
+
+        [JsonProperty(PropertyName = "quantity")]
+        public int Quantity { get { return quantity; } set { quantity = value; } }
+
+        public void UpdateTotalUnitPrice()
         {
-            _totalPrice = _unitPrice * _quantity;
+            totalPrice = unitPrice * quantity;
+        }
+        public void UpdateTotalHoldingPrice()
+        {
+            totalPrice = holdingPrice * quantity;
         }
     }
 }

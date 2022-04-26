@@ -1,6 +1,9 @@
 import React from "react";
 import StockLists from "./StockLists";
 import LoadingButton from "@mui/lab/LoadingButton";
+import Button from "@mui/material/Button";
+import AddOutlined from "@mui/icons-material/AddCircleOutlineOutlined";
+import AddStockDialog from "./AddStock/AddStockDialog";
 
 export class StocksPortfolio extends React.Component {
   constructor(props) {
@@ -9,8 +12,21 @@ export class StocksPortfolio extends React.Component {
     this.state = {
       isLoading: false,
       stockPortfolio: Object,
+      open: false,
     };
   }
+
+  handleClickOpen = () => {
+    this.setState({
+      open: true,
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      open: false,
+    });
+  };
 
   componentDidMount() {
     this.GetStocksList();
@@ -28,18 +44,36 @@ export class StocksPortfolio extends React.Component {
       },
     };
 
-    fetch('https://yh-finance.p.rapidapi.com/market/get-watchlist-detail?userId=X3NJ2A7VDSABUI4URBWME2PZNM&pfId=the_only_tech_stocks_that_matter', options)
-        .then(response => response.json())
-        .then(response => this.setState({
-            isLoading: false,
-            stockPortfolio: response.finance.result[0]
-        }))
-        .catch(err => console.error(err));
+    // fetch(
+    //   "https://yh-finance.p.rapidapi.com/market/get-watchlist-detail?userId=X3NJ2A7VDSABUI4URBWME2PZNM&pfId=the_only_tech_stocks_that_matter",
+    //   options
+    // )
+    //   .then((response) => response.json())
+    //   .then((response) =>
+    //     this.setState({
+    //       isLoading: false,
+    //       stockPortfolio: response.finance.result[0],
+    //     })
+    //   )
+    //   .catch((err) => console.error(err));
   }
 
   render() {
     return (
       <React.Fragment>
+        <Button
+          variant="contained"
+          startIcon={<AddOutlined size="0.9rem" />}
+          onClick={this.handleClickOpen}
+        >
+          Add Stock
+        </Button>
+        <div>
+          <AddStockDialog
+            open={this.state.open}
+            handleClose={this.handleClose}
+          />
+        </div>
         <div>
           <StockLists portfolio={this.state.stockPortfolio} />
         </div>

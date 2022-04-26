@@ -9,3 +9,4 @@ C:\JK\Projects\Dotnet\Self\Bazzar\B.Domain\obj\Debug\net5.0\B.Domain.csproj.Core
 C:\JK\Projects\Dotnet\Self\Bazzar\B.Domain\obj\Debug\net5.0\B.Domain.dll
 C:\JK\Projects\Dotnet\Self\Bazzar\B.Domain\obj\Debug\net5.0\ref\B.Domain.dll
 C:\JK\Projects\Dotnet\Self\Bazzar\B.Domain\obj\Debug\net5.0\B.Domain.pdb
+C:\JK\Projects\Dotnet\Self\Bazzar\B.Domain\obj\Debug\net5.0\B.Domain.csproj.AssemblyReference.cache
