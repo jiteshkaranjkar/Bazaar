@@ -1066,7 +1066,8 @@
         "dependencies": {
           "B.Common": "1.0.0",
           "B.Domain": "1.0.0",
-          "Microsoft.Azure.Cosmos": "3.26.1"
+          "Microsoft.Azure.Cosmos": "3.26.1",
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "B.Service.dll": {}

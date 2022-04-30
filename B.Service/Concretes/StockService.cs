@@ -1,7 +1,8 @@
 ﻿using B.Application.Contracts;
-using B.Application.Dtos;
 using B.Domain.Stocks;
 using Microsoft.Azure.Cosmos;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,8 +12,13 @@ namespace B.Application.Concretes
     public class StockService : IStockService
     {
         private Container container;
+        private Database cosmosDatabase;
         //private readonly IUnitOfWork _unitOfWork;
         //private readonly IMapper _mapper;
+
+        List<Portfolio> usPortfolio = new List<Portfolio>();
+        List<Portfolio> indiaPortfolio = new List<Portfolio>();
+        List<Portfolio> ausPortfolio = new List<Portfolio>();
 
         public StockService(
           CosmosClient dbClient,
@@ -20,6 +26,7 @@ namespace B.Application.Concretes
           string containerName)
         {
             this.container = dbClient.GetContainer(databaseName, containerName);
+            cosmosDatabase = dbClient.GetDatabase(databaseName);
         }
 
         /// <summary>
@@ -53,13 +60,68 @@ namespace B.Application.Concretes
         public async Task<List<Stock>> GetStocksAsync(string queryString)
         {
             var query = this.container.GetItemQueryIterator<Stock>(new QueryDefinition(queryString));
-            List<Stock> results = new List<Stock>();
+            List<Stock> lstStocks = new List<Stock>();
             while (query.HasMoreResults)
             {
-                var response = await query.ReadNextAsync();
-                //results.AddRange(response.ToList());
+                FeedResponse<Stock> result = await query.ReadNextAsync();
+                foreach (var item in result)
+                {
+                    lstStocks.Add(item);
+                }
             }
-            return results;
+            return lstStocks;
+        }
+
+        public async Task<List<List<Portfolio>>> GetPortfolioAsync(string queryString, string container)
+        {
+            List<ContainerProperties> lstContainer = new List<ContainerProperties>();
+            List<List<Portfolio>> lstStockPortfolio = new List<List<Portfolio>>();
+
+            using (FeedIterator<ContainerProperties> feedIterator = this.cosmosDatabase.GetContainerQueryIterator<ContainerProperties>())
+            {
+                while (feedIterator.HasMoreResults)
+                {
+                    FeedResponse<ContainerProperties> response = await feedIterator.ReadNextAsync();
+                    foreach (ContainerProperties containr in response)
+                    {
+                        lstContainer.Add(containr);
+                        if (containr.Id != "stock")
+                        {
+                            Container dbContainer = this.cosmosDatabase.GetContainer(containr.Id);
+                            List<Portfolio> portfolio = GetPortfolioData(dbContainer, queryString).Result;
+                            //var portfolioToSerialize = new Portfolios();
+                            //portfolioToSerialize.Items.Add(JsonConvert.SerializeObject(portfolio));
+                            lstStockPortfolio.Add(portfolio);
+                        }
+                    }
+                }
+            }
+
+
+            return lstStockPortfolio;
+        }
+
+        private async Task<List<Portfolio>> GetPortfolioData(Container dbContainer, string queryString)
+        {
+            List<Portfolio> lstStockPortfolio = new List<Portfolio>();
+            try
+            {
+                var query = dbContainer.GetItemQueryIterator<Portfolio>(new QueryDefinition(queryString));
+
+                while (query.HasMoreResults)
+                {
+                    FeedResponse<Portfolio> result = await query.ReadNextAsync();
+                    foreach (var item in result)
+                    {
+                        lstStockPortfolio.Add(item);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return lstStockPortfolio;
         }
 
         public async Task UpdateStock(Stock stock)

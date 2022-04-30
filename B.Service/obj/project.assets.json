@@ -1130,7 +1130,8 @@
     "net5.0": [
       "B.Common >= 1.0.0",
       "B.Domain >= 1.0.0",
-      "Microsoft.Azure.Cosmos >= 3.26.1"
+      "Microsoft.Azure.Cosmos >= 3.26.1",
+      "Newtonsoft.Json >= 13.0.1"
     ]
   },
   "packageFolders": {
@@ -1182,6 +1183,10 @@
           "Microsoft.Azure.Cosmos": {
             "target": "Package",
             "version": "[3.26.1, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[13.0.1, )"
           }
         },
         "imports": [

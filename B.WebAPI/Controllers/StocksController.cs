@@ -20,9 +20,6 @@ namespace B.WebAPI.Controllers
         private readonly ILogger<StocksController> logger;
         private readonly IStockService stockService;
 
-        private string dbName = "bazaar";
-        private string containerName = "stock";
-
         public StocksController(ILogger<StocksController> logger, IStockService stockService)
         {
             this.logger = logger;
@@ -38,6 +35,14 @@ namespace B.WebAPI.Controllers
             return stocks;
         }
 
+        // GET: api/<StocksController>
+        [HttpGet]
+        [Route("portfolio")]
+        public async Task<List<List<Portfolio>>> GetPortfolio([FromQuery] string container)
+        {
+            List<List<Portfolio>> portfolios = await stockService.GetPortfolioAsync("SELECT * FROM c", container);
+            return portfolios;
+        }
         // GET api/<StocksController>/5
         [HttpGet("{id}")]
         public string Get(int id)
@@ -57,7 +62,8 @@ namespace B.WebAPI.Controllers
                     await stockService.AddStock(stock);
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 throw ex;
             }
         }

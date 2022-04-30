@@ -1,96 +1,117 @@
-import React from "react";
-import StockLists from "./StockLists";
-import LoadingButton from "@mui/lab/LoadingButton";
+import React, { Fragment, useState } from "react";
+import { DataGrid } from "@mui/x-data-grid";
+import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import AddOutlined from "@mui/icons-material/AddCircleOutlineOutlined";
+import Box from "@mui/material/Box";
 import AddStockDialog from "./AddStock/AddStockDialog";
 
-export class StocksPortfolio extends React.Component {
-  constructor(props) {
-    super(props);
+const columns = [
+  { field: "id", headerName: "ID", width: 90, sortable: false, hide: true },
+  { field: "symbol", headerName: "SYM", width: 90 },
+  { field: "date", headerName: "DATE", width: 110 },
+  { field: "time", headerName: "TIME", width: 90 , hide: true},
+  { field: "change", headerName: "CHANGE", width: 100 },
+  { field: "open", headerName: "OPEN", width: 90 },
+  { field: "high", headerName: "HIGH", width: 90 },
+  { field: "low", headerName: "LOW", width: 90 },
+  { field: "volume", headerName: "VOLUME", width: 100 },
+  { field: "tradeDate", headerName: "TRADEDATE", width: 90 },
+  { field: "purchase", headerName: "PURCHASE", width: 90 },
+  { field: "price", headerName: "PRICE", width: 90, editable: true },
+  { field: "quantity", headerName: "QTY", width: 90, editable: true },
+  { field: "commission", headerName: "COMMISSION", width: 90 },
+  { field: "highLimit", headerName: "HIGHLIMIT", width: 90 },
+  { field: "lowLimit", headerName: "LOWLIMIT", width: 90 },
+  {
+    field: "comment",
+    headerName: "COMMENT",
+    width: 90,
+    editable: true,
+    description: "Holding Price.",
+  },
+];
 
-    this.state = {
-      isLoading: false,
-      stockPortfolio: Object,
-      open: false,
-    };
-  }
+const StocksPortfolio = (props) => {
+  const [open, setOpen] = useState(false);
 
-  handleClickOpen = () => {
-    this.setState({
-      open: true,
-    });
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
-  handleClose = () => {
-    this.setState({
-      open: false,
-    });
+  const handleClose = () => {
+    setOpen(false);
   };
 
-  componentDidMount() {
-    this.GetStocksList();
+  var rows = [];
+  if (props.portfolio !== undefined) {
+    console.log(props.portfolio.length);
+    rows = props.portfolio.map((folio) => ({
+      id: folio.id,
+      symbol: folio.symbol,
+      currentPrice: folio.currentPrice,
+      date: folio.date,
+      time: folio.time,
+      change: folio.change,
+      open: folio.open,
+      high: folio.high,
+      low: folio.low,
+      volume: folio.volume,
+      tradeDate: folio.tradeDate,
+      purchase: folio.purchase,
+      price: folio.price,
+      quantity: folio.quantity,
+      commission: folio.commission,
+      highLimit: folio.highLimit,
+      lowLimit: folio.lowLimit,
+      comment: folio.comment,
+    }));
+    console.log(rows);
   }
-
-  GetStocksList() {
-    //show progress bar
-    this.setState({ isLoading: true });
-
-    const options = {
-      method: "GET",
-      headers: {
-        "X-RapidAPI-Host": "yh-finance.p.rapidapi.com",
-        "X-RapidAPI-Key": "38cf53090fmsh0faab578421f033p164fafjsn73b543184b1a",
-      },
-    };
-
-    // fetch(
-    //   "https://yh-finance.p.rapidapi.com/market/get-watchlist-detail?userId=X3NJ2A7VDSABUI4URBWME2PZNM&pfId=the_only_tech_stocks_that_matter",
-    //   options
-    // )
-    //   .then((response) => response.json())
-    //   .then((response) =>
-    //     this.setState({
-    //       isLoading: false,
-    //       stockPortfolio: response.finance.result[0],
-    //     })
-    //   )
-    //   .catch((err) => console.error(err));
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        <Button
-          variant="contained"
-          startIcon={<AddOutlined size="0.9rem" />}
-          onClick={this.handleClickOpen}
-        >
-          Add Stock
-        </Button>
-        <div>
-          <AddStockDialog
-            open={this.state.open}
-            handleClose={this.handleClose}
-          />
-        </div>
-        <div>
-          <StockLists portfolio={this.state.stockPortfolio} />
-        </div>
-        {this.state.isLoading ? (
-          <LoadingButton
-            loading
-            loadingIndicator="Loading..."
-            variant="outlined"
-          >
-            Fetch data
-          </LoadingButton>
+  return (
+    <Fragment>
+      <div>
+        {typeof props.portfolio !== "undefined" ? (
+          <div style={{ display: "flow-root", height: '800px', width: '1000px' }}>
+            <Box display="flex" m={2} pt={2}>
+              <Typography
+                variant="h5"
+                gutterBottom
+                component="div"
+                display="inline"
+              >
+                {props.name}
+                Portfolio
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  component="div"
+                  display="inline"
+                  style={{ marginLeft: 20 }}
+                >
+                  <Button variant="contained" onClick={handleClickOpen}>
+                    Add Stock
+                  </Button>
+                </Typography>
+              </Typography>
+            </Box>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              rowLength={10}
+              pageSize={15}
+              checkboxSelection
+              disableSelectionOnClick
+            />
+          </div>
         ) : (
-          <div></div>
+          <div>No data found</div>
         )}
-      </React.Fragment>
-    );
-  }
-}
+      </div>
+      <div>
+        <AddStockDialog open={open} handleClose={handleClose} />
+      </div>
+    </Fragment>
+  );
+};
 
 export default StocksPortfolio;
