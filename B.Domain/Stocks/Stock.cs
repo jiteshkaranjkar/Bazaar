@@ -44,4 +44,17 @@ namespace B.Domain.Stocks
             totalPrice = holdingPrice * quantity;
         }
     }
+
+    public class StockRowEdit
+    {
+        public Guid Id { get; set; }
+        public string PropertyName { get; init; }
+        public string PropertyValue { get; init; }
+    }
+
+    public class StockEdit
+    {
+        public Stock Stock { get; set; }
+        public StockRowEdit EditedData { get; set; }
+    }
 }

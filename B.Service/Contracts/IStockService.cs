@@ -11,7 +11,7 @@ namespace B.Application.Contracts
         Task<List<List<Portfolio>>> GetPortfolioAsync(string query, string container);
         Task<Stock> GetStockById(string id);
         Task AddStock(Stock stock);
-        Task UpdateStock(Stock stock);
+        Task<Portfolio> UpdateStock(Portfolio portfolio);
         Task DeleteStock(string id);
 
   }

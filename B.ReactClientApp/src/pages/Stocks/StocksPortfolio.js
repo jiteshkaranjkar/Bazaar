@@ -8,12 +8,13 @@ import AddStockDialog from "./AddStock/AddStockDialog";
 const columns = [
   { field: "id", headerName: "ID", width: 90, sortable: false, hide: true },
   { field: "symbol", headerName: "SYM", width: 90 },
-  { field: "date", headerName: "DATE", width: 110 },
-  { field: "time", headerName: "TIME", width: 90 , hide: true},
+  { field: "currentPrice", headerName: "LTP", width: 90, editable: true },
+  { field: "time", headerName: "TIME", width: 90, hide: true },
   { field: "change", headerName: "CHANGE", width: 100 },
   { field: "open", headerName: "OPEN", width: 90 },
   { field: "high", headerName: "HIGH", width: 90 },
   { field: "low", headerName: "LOW", width: 90 },
+  { field: "date", headerName: "DATE", width: 110 },
   { field: "volume", headerName: "VOLUME", width: 100 },
   { field: "tradeDate", headerName: "TRADEDATE", width: 90 },
   { field: "purchase", headerName: "PURCHASE", width: 90 },
@@ -33,6 +34,9 @@ const columns = [
 
 const StocksPortfolio = (props) => {
   const [open, setOpen] = useState(false);
+  const [selectedCellParams, setSelectedCellParams] = useState(null);
+  const [crows, setCrows] = useState(rows);
+  const [CurrentRow, setCurrentRow] = useState();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -44,7 +48,6 @@ const StocksPortfolio = (props) => {
 
   var rows = [];
   if (props.portfolio !== undefined) {
-    console.log(props.portfolio.length);
     rows = props.portfolio.map((folio) => ({
       id: folio.id,
       symbol: folio.symbol,
@@ -65,13 +68,60 @@ const StocksPortfolio = (props) => {
       lowLimit: folio.lowLimit,
       comment: folio.comment,
     }));
-    console.log(rows);
+    // console.log(rows);
   }
+  const handleCellClick = React.useCallback((params) => {
+    setSelectedCellParams(params);
+    // console.log(params);
+  }, []);
+
+  const handleCellEditStart = (params, event) => {
+    // event.defaultMuiPrevented = true;
+    // console.log(params);
+  };
+
+  const handleCellEditStop = (params, event) => {
+    // event.defaultMuiPrevented = true;
+    // console.log(params);
+  };
+
+  const updateRowCosmosDB = (rowId) => {
+    const updatedRow = rows.filter(row => row.id === rowId).map(row => row)[0];
+    const requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedRow),
+    };
+    fetch("http://localhost:5000/api/stocks/portfolio", requestOptions)
+      .then((response) => response.json())
+      .then(response => rows = {...rows, response})
+      .catch((err) => console.error(err));
+  };
+
+  const handleCellEditCommit = React.useCallback(
+    ({ id, field, value }) => {
+      if (field === "currentPrice") {
+        const currentPrice = value.toString();
+        const updatedRows = rows.map((row) => {
+          if (row.id === id) {
+            return { ...row, currentPrice };
+          }
+          return row;
+        });
+        rows = updatedRows;
+        updateRowCosmosDB(id);
+      }
+    },
+    [rows]
+  );
+
   return (
     <Fragment>
       <div>
         {typeof props.portfolio !== "undefined" ? (
-          <div style={{ display: "flow-root", height: '800px', width: '1000px' }}>
+          <div
+            style={{ display: "flow-root", height: "800px", width: "1500px" }}
+          >
             <Box display="flex" m={2} pt={2}>
               <Typography
                 variant="h5"
@@ -101,6 +151,10 @@ const StocksPortfolio = (props) => {
               pageSize={15}
               checkboxSelection
               disableSelectionOnClick
+              onCellClick={handleCellClick}
+              onCellEditStart={handleCellEditStart}
+              onCellEditStop={handleCellEditStop}
+              onCellEditCommit={handleCellEditCommit}
             />
           </div>
         ) : (

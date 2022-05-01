@@ -69,9 +69,25 @@ namespace B.WebAPI.Controllers
         }
 
         // PUT api/<StocksController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        [Route("portfolio")]
+        public async Task<Portfolio> Put([FromBody] dynamic editedRow)
         {
+            try
+            {
+                Portfolio portfolio = new Portfolio();
+                if (!string.IsNullOrEmpty(editedRow.ToString()))
+                {
+                    portfolio = JsonConvert.DeserializeObject<Portfolio>(editedRow.ToString());
+                    portfolio.Id = new Guid(portfolio.Id.ToString());
+                    portfolio = await stockService.UpdateStock(portfolio);
+                }
+                return portfolio;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // DELETE api/<StocksController>/5

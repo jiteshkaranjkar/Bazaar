@@ -124,9 +124,10 @@ namespace B.Application.Concretes
             return lstStockPortfolio;
         }
 
-        public async Task UpdateStock(Stock stock)
+        public async Task<Portfolio> UpdateStock(Portfolio portfolio)
         {
-            await this.container.UpsertItemAsync<Stock>(stock, new PartitionKey(stock.Id.ToString()));
+            ItemResponse<Portfolio> folio = await this.container.UpsertItemAsync<Portfolio>(portfolio, new PartitionKey(portfolio.Id.ToString()));
+            return folio.Resource;
         }
     }
 }
