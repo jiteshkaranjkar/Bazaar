@@ -11,20 +11,22 @@ namespace B.Application.Concretes
 
     public class StockService : IStockService
     {
+        private CosmosClient dbClient;
         private Container container;
         private Database cosmosDatabase;
         //private readonly IUnitOfWork _unitOfWork;
         //private readonly IMapper _mapper;
 
-        List<Portfolio> usPortfolio = new List<Portfolio>();
-        List<Portfolio> indiaPortfolio = new List<Portfolio>();
-        List<Portfolio> ausPortfolio = new List<Portfolio>();
+        List<Portfolio> INDPortfolio = new List<Portfolio>();
+        List<Portfolio> AUSPortfolio = new List<Portfolio>();
+        List<Portfolio> USAPortfolio = new List<Portfolio>();
 
         public StockService(
           CosmosClient dbClient,
           string databaseName,
           string containerName)
         {
+            this.dbClient = dbClient;
             this.container = dbClient.GetContainer(databaseName, containerName);
             cosmosDatabase = dbClient.GetDatabase(databaseName);
         }
@@ -89,6 +91,18 @@ namespace B.Application.Concretes
                         {
                             Container dbContainer = this.cosmosDatabase.GetContainer(containr.Id);
                             List<Portfolio> portfolio = GetPortfolioData(dbContainer, queryString).Result;
+                            switch (containr.Id)
+                            {
+                                case "AustralianPortfolio":
+                                    AUSPortfolio = portfolio;
+                                    break;
+                                case "IndianPortfolio":
+                                    INDPortfolio = portfolio;
+                                    break;
+                                case "USPortfolio":
+                                    USAPortfolio = portfolio;
+                                    break;
+                            }
                             //var portfolioToSerialize = new Portfolios();
                             //portfolioToSerialize.Items.Add(JsonConvert.SerializeObject(portfolio));
                             lstStockPortfolio.Add(portfolio);
@@ -124,9 +138,11 @@ namespace B.Application.Concretes
             return lstStockPortfolio;
         }
 
-        public async Task<Portfolio> UpdateStock(Portfolio portfolio)
-        {
-            ItemResponse<Portfolio> folio = await this.container.UpsertItemAsync<Portfolio>(portfolio, new PartitionKey(portfolio.Id.ToString()));
+        public async Task<Portfolio> UpdateStock(Portfolio portfolio, string portfolioName)
+     {
+            BazaarDBContainerNames containerName = (BazaarDBContainerNames)Enum.Parse(typeof(BazaarDBContainerNames), portfolioName, true);
+            Container dbContainer = this.cosmosDatabase.GetContainer(containerName.GetEnumDescription());
+            ItemResponse<Portfolio> folio = await dbContainer.UpsertItemAsync<Portfolio>(portfolio, new PartitionKey(portfolio.Id.ToString()));
             return folio.Resource;
         }
     }

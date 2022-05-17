@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -37,6 +37,14 @@ const StocksPortfolio = (props) => {
   const [selectedCellParams, setSelectedCellParams] = useState(null);
   const [crows, setCrows] = useState(rows);
   const [CurrentRow, setCurrentRow] = useState();
+  const [portfolioName, setPortfolioName] = useState('');
+
+  useEffect(() => {
+    setPortfolioName(props.name);
+    return () => {
+    }
+  }, [])
+  
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -92,7 +100,7 @@ const StocksPortfolio = (props) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedRow),
     };
-    fetch("http://localhost:5000/api/stocks/portfolio", requestOptions)
+    fetch("http://localhost:5000/api/stocks/portfolio?name="+portfolioName, requestOptions)
       .then((response) => response.json())
       .then(response => rows = {...rows, response})
       .catch((err) => console.error(err));

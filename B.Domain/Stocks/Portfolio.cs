@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 
 namespace B.Domain.Stocks
 {
@@ -47,5 +49,59 @@ namespace B.Domain.Stocks
     public class Portfolios
     {
         public List<Portfolio> Items { get; set; }
+    }
+
+    /// <summary>
+    /// Enum of Cosmos DB Containers
+    /// </summary>
+    public enum BazaarDBContainerNames
+    {
+        None = 0,
+        [Description("AustralianPortfolio")]
+        AUS = 1,
+        [Description("IndianPortfolio")]
+        IND = 2,
+        [Description("USPortfolio")]
+        USA = 3
+    }
+
+
+    public static class EnumExtension
+    {
+        public static string GetEnumDescription(this Enum enm)
+        {
+            var t = enm.GetType().GetField(enm.ToString());
+            DescriptionAttribute[] attributes = (DescriptionAttribute[])t.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            if (attributes != null && attributes.Any())
+            {
+                return attributes.First().Description;
+            }
+
+            return enm.ToString();
+        }
+
+        public static string GetEnumFromDescription(string description, Type enumType)
+        {
+            try
+            {
+                foreach (var field in enumType.GetFields())
+                {
+                    DescriptionAttribute attribute
+                        = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
+                    if (attribute == null)
+                        continue;
+                    if (attribute.Description == description)
+                    {
+                        return field.Name;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return string.Empty;
+        }
     }
 }

@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "B.Infrastructure", "B.Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{50B10F7F-9541-4511-BC08-4952083949AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B.Tests", "B.Tests\B.Tests.csproj", "{4935892C-F30E-4578-840B-58A5E993E3B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "B.Tests", "B.Tests\B.Tests.csproj", "{4935892C-F30E-4578-840B-58A5E993E3B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

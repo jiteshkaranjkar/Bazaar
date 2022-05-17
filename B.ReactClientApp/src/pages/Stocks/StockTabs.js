@@ -33,7 +33,6 @@ export default function StockTabs() {
   const [portfolio, setPortfolio] = useState([]);
 
   useEffect(() => {
-    // console.log(value);
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -71,7 +70,7 @@ export default function StockTabs() {
                 allowScrollButtonsMobile
               >
                 <Tab
-                  label="Indian"
+                  label="IND"
                   value="IND"
                   sx={{
                     "&:hover": {
@@ -84,7 +83,7 @@ export default function StockTabs() {
                   }}
                 />
                 <Tab
-                  label="Australian"
+                  label="AUS"
                   value="AUS"
                   sx={{
                     "&:hover": {
@@ -97,8 +96,8 @@ export default function StockTabs() {
                   }}
                 />
                 <Tab
-                  label="US"
-                  value="US"
+                  label="USA"
+                  value="USA"
                   sx={{
                     "&:hover": {
                       color: "red",
@@ -112,14 +111,14 @@ export default function StockTabs() {
               </TabList>
             </Box>
             <TabPanel value="IND">
-              <StocksPortfolio portfolio={portfolio[1]} name="Indian " />
+              <StocksPortfolio portfolio={portfolio[1]} name="IND " />
             </TabPanel>
-            <TabPanel value="US">
-              <StocksPortfolio portfolio={portfolio[0]} name="US " />
+            <TabPanel value="USA">
+              <StocksPortfolio portfolio={portfolio[0]} name="USA " />
             </TabPanel>
             <TabPanel value="AUS">
               <div>
-                <StocksPortfolio portfolio={portfolio[2]} name="Australian " />
+                <StocksPortfolio portfolio={portfolio[2]} name="AUS " />
               </div>
             </TabPanel>
           </TabContext>

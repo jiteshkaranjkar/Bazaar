@@ -71,7 +71,7 @@ namespace B.WebAPI.Controllers
         // PUT api/<StocksController>/5
         [HttpPut]
         [Route("portfolio")]
-        public async Task<Portfolio> Put([FromBody] dynamic editedRow)
+        public async Task<Portfolio> Put([FromBody] dynamic editedRow, [FromQuery] string name)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace B.WebAPI.Controllers
                 {
                     portfolio = JsonConvert.DeserializeObject<Portfolio>(editedRow.ToString());
                     portfolio.Id = new Guid(portfolio.Id.ToString());
-                    portfolio = await stockService.UpdateStock(portfolio);
+                    portfolio = await stockService.UpdateStock(portfolio, name);
                 }
                 return portfolio;
             }
